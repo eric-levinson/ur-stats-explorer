@@ -14,16 +14,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const MainNav = () => {
+export const MainNav = (page) => {
     const classes = useStyles();
+    
     return (
         <AppBar position="static">
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="indigo" aria-label="menu">
-                    <MenuIcon />
+                <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu">
+                    <MenuIcon color='action'/>
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    News
+                    {page.page}
                 </Typography>
                 <Button color="inherit">Login</Button>
             </Toolbar>
