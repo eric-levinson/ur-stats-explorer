@@ -12,6 +12,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { SimpleTabs } from './Tabs';
+import { GroupList } from '../data/GroupList';
+
 
 const drawerWidth = 240;
 
@@ -34,13 +37,16 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    height: '100%',
+    backgroundColor: theme.palette.background.default,
   },
 }));
+
 
 export const ClippedDrawer = (e) => {
   const classes = useStyles();
 
+  console.log(e)
 
   return (
     <div className={classes.root}>
@@ -48,9 +54,10 @@ export const ClippedDrawer = (e) => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Clipped drawer
+            Explore - View
           </Typography>
         </Toolbar>
+
       </AppBar>
       <Drawer
         className={classes.drawer}
@@ -60,6 +67,7 @@ export const ClippedDrawer = (e) => {
         }}
       >
         <Toolbar />
+        <GroupList id='season-11-phqfzmk1fq' />
         <div className={classes.drawerContainer}>
           <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -80,6 +88,10 @@ export const ClippedDrawer = (e) => {
           </List>
         </div>
       </Drawer>
+      <div className={classes.content}>
+      <Toolbar />
+      <SimpleTabs/>
+      </div>
     </div>
   );
 }

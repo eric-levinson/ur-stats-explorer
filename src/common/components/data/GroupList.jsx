@@ -75,7 +75,7 @@ const ResolveItems = props => {
 
 
 
-export const SeasonLists = (e) => {
+export const GroupList = (e) => {
 
 
     const classes = useStyles();

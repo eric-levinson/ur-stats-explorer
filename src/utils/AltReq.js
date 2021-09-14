@@ -20,9 +20,6 @@ export const UrlParse = (id, type) => {
         let err = 'err'
         throw err
     }
- 
-
-    
 
   }
 
