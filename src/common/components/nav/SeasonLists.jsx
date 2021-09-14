@@ -1,4 +1,4 @@
-import React, {setState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -12,7 +12,6 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import Typography from '@material-ui/core/Typography';
 import { Route, MemoryRouter } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
-import _ from 'lodash'
 
 import { UrlParse, AltReq} from '../../../utils/AltReq'
 
