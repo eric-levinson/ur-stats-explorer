@@ -56,10 +56,6 @@ const useStyles = makeStyles({
 
 export const SeasonLists = (e) => {
 
-    constructor(props) {
-        super(props)
-        this.state = {data}
-    }
 
     const classes = useStyles();
     this.setState({data: 'data'})

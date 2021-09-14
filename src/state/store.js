@@ -3,6 +3,6 @@ import chasingReducer from './ballchasing/ballchasingSlice'
 
 export default configureStore({
   reducer: {
-    chasing: chasingReducer,
+    chasing: chasingReducer
   }
 })

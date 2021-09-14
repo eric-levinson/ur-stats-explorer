@@ -1,28 +1,26 @@
 import logo from '../logo.svg';
 import '../App.css';
+import { useParams, useRouteMatch } from "react-router-dom";
+import { ClippedDrawer } from '../common/components/nav/ClippedDrawer'
+import  BallchaseRequest  from '../utils/BallchaseRequest.js'
 
-import { DrawerNav } from '../common/components/nav/Drawer'
+function ExplorePage(e) {
 
-function ExplorePage() {
-    const crumbs = [{ name: 'Home', link: '/'},{ name: 'Home', link: '/'},{ name: 'Home', link: '/'}]
-    const mainNav = [{name: 'Ramen', link: '/ramen', icon: 'test-icon'},
-                    {name: 'Noodle Cup Series', link: '/ncs', icon: 'test-icon'},
-                    {name: 'Macaroni', link: '/macaroni', icon: 'test-icon'},
-                    {name: 'Fettuccine', link: '/fettuccine', icon: 'test-icon'},
-                    {name: 'Linguine', link: '/linguine', icon: 'test-icon'}]
-    const subNav = [{name: 'Core', link: '/ramen/core', icon: 'test-icon'},
-                    {name: 'Boost', link: '/ramen/boost', icon: 'test-icon'},
-                    {name: 'Positioning', link: '/ramen/positioning', icon: 'test-icon'},
-                    {name: 'Movement', link: '/ramen/movement', icon: 'test-icon'}]
+    const { season, league, week, match } = useParams()
+    let { path, url } = useRouteMatch();
+    BallchaseRequest('united-rogue-d1hs10f4dh', 'group-list')
+    console.log(e)
     return (
         <div className="App">
-            < DrawerNav page='Home' crumbs={crumbs} mainnav={mainNav} subnav={subNav}/>
+            < ClippedDrawer />
             <div className="App-header">
             
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
                     Edit <code>src/App.js</code> and save to reload.
                 </p>
+                <p>{season} {league} {week} {match}</p>
+                <p>{path} {url} </p>
                 <a
                     className="App-link"
                     href="https://reactjs.org"

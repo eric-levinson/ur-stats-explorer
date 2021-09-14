@@ -1,11 +1,21 @@
-import logo from '../logo.svg';
 import '../App.css';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import { MainNav } from '../common/components/nav/AppBar'
+import { SeasonLists } from '../common/components/nav/SeasonLists'
 
-import { DrawerNav } from '../common/components/nav/Drawer'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    }
+}));
 
 function HomePage() {
-    const crumbs = [{ name: 'Home', link: '/'},{ name: 'Home', link: '/'},{ name: 'Home', link: '/'}]
-    const mainNav = [{name: 'Ramen', link: '/ramen', icon: 'test-icon'},
+    const classes = useStyles();
+    const crumbs = [{ name: 'Home', link: '/' }]
+    /*const mainNav = [{name: 'Ramen', link: '/ramen', icon: 'test-icon'},
                     {name: 'Noodle Cup Series', link: '/ncs', icon: 'test-icon'},
                     {name: 'Macaroni', link: '/macaroni', icon: 'test-icon'},
                     {name: 'Fettuccine', link: '/fettuccine', icon: 'test-icon'},
@@ -13,24 +23,26 @@ function HomePage() {
     const subNav = [{name: 'Core', link: '/ramen/core', icon: 'test-icon'},
                     {name: 'Boost', link: '/ramen/boost', icon: 'test-icon'},
                     {name: 'Positioning', link: '/ramen/positioning', icon: 'test-icon'},
-                    {name: 'Movement', link: '/ramen/movement', icon: 'test-icon'}]
+                    {name: 'Movement', link: '/ramen/movement', icon: 'test-icon'}]*/
+
+
     return (
         <div className="App">
-            < DrawerNav page='Home' crumbs={crumbs} mainnav={mainNav} subnav={subNav}/>
+
+            < MainNav page='Home' crumbs={crumbs} />
             <div className="App-header">
-            
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
+                <div className={classes.root}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <h2>Season 10</h2>
+                            <SeasonLists id='season-10-j1nooa6jlw'/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <h2>Season 11</h2>
+                            <SeasonLists id='season-11-phqfzmk1fq'/>
+                        </Grid>
+                    </Grid>
+                </div>
             </div>
         </div>
     );

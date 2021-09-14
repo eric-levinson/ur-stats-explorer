@@ -95,7 +95,7 @@ export const DrawerNav = (e) => {
     setOpen(false);
   };
 
-  console.log(e)
+  //console.log(e)
   return (
     <div className={classes.root}>
       <CssBaseline />
