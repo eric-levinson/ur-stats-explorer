@@ -14,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 //import _ from 'lodash'
 
-import { UrlParse, AltReq} from '../../../utils/AltReq'
+import { UrlParse, AltReq } from '../../../utils/AltReq'
 
 //import { LocalDrinkSharp } from '@material-ui/icons';
 //import  BallchaseRequest  from '../utils/BallchaseRequest.js'
@@ -102,8 +102,6 @@ export const SeasonLists = (e) => {
                         <ResolveItems url={url} />
                     </List>
                 </Paper>
-
-                <p></p>
             </div>
         </MemoryRouter>
         

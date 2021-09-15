@@ -4,14 +4,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { SimpleTabs } from './Tabs';
 import { GroupList } from '../data/GroupList';
 
@@ -33,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerContainer: {
-    overflow: 'auto',
+    overflow: 'hidden',
   },
   content: {
     flexGrow: 1,
@@ -46,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export const ClippedDrawer = (e) => {
   const classes = useStyles();
 
-  console.log(e)
+  console.log(e.origin)
 
   return (
     <div className={classes.root}>
@@ -67,25 +60,9 @@ export const ClippedDrawer = (e) => {
         }}
       >
         <Toolbar />
-        <GroupList id='season-11-phqfzmk1fq' />
+        
         <div className={classes.drawerContainer}>
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+        <GroupList id={e.origin} />
         </div>
       </Drawer>
       <div className={classes.content}>

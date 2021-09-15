@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { MainNav } from '../common/components/nav/AppBar'
-import { SeasonLists } from '../common/components/nav/SeasonLists'
+import { SeasonLists } from '../common/components/data/SeasonLists'
 
 
 const useStyles = makeStyles((theme) => ({

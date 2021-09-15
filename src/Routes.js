@@ -22,7 +22,7 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/explore/:origin' component={ExplorePage} />
-          <Route path='/s10/' component={ExplorePage} origin='season-10-j1nooa6jlw' />
+          <Route path='/s10' component={ExplorePage} origin='season-10-j1nooa6jlw' />
           <Route path='/s11' component={ExplorePage} origin='season-11-phqfzmk1fq' />
 
           

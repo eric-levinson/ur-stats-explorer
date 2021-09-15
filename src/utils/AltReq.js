@@ -9,13 +9,13 @@ export const UrlParse = (id, type) => {
     const baseurl = 'http://localhost:8080/https://ballchasing.com/api/'
     //let reqUrl = baseurl + '/'
     if (type === 'group-list') {
-        return baseurl + '/groups?group=' + id + '&?sort-by=created&?sort-dir=asc'
+        return baseurl + 'groups?group=' + id + '&?sort-by=created&?sort-dir=asc'
     } else if ( type === 'group-stats' ) {
-        return baseurl + '/groups/' + id
+        return baseurl + 'groups/' + id
     } else if ( type === 'match-list') {
-        return baseurl + '/replays?group=' + id + '&?sort-by=replay-date&?sort-by=asc'
+        return baseurl + 'replays?group=' + id + '&?sort-by=replay-date&?sort-by=asc'
     } else if ( type === 'game-stats') {
-        return baseurl + '/replays/' + id
+        return baseurl + 'replays/' + id
     } else {
         let err = 'err'
         throw err
@@ -26,7 +26,7 @@ export const UrlParse = (id, type) => {
 
 
 
-export const AltReq = (reqUrl) => axios.get(reqUrl, {
+export const AltReq = (url) => axios.get(url, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -36,4 +36,4 @@ export const AltReq = (reqUrl) => axios.get(reqUrl, {
       'Authorization': key,
     }
   })
-  
+

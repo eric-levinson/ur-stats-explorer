@@ -114,7 +114,7 @@ export const DataTableFilter = (e) => {
         maxColumns: 10,
     });
 
-    console.log(e)
+    //console.log(e)
 
     const [searchText, setSearchText] = React.useState('');
     const [rows, setRows] = React.useState(data.rows);
