@@ -17,6 +17,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
 import { createTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
+import { UrlParse, AltReq } from '../../../utils/AltReq';
 
 function escapeRegExp(value) {
     return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -108,21 +109,29 @@ QuickSearchToolbar.propTypes = {
 };
 
 export const DataTableFilter = (e) => {
-    const { data } = useDemoData({
-        dataSet: 'Commodity',
-        rowLength: 100,
-        maxColumns: 10,
-    });
-
-    //console.log(e)
+    let id = UrlParse(e.id, 'group-stats')
+    //const res =  AltReq(id)
+    //const { data } = res.data.players.map(player => {return {name: player.name}})
+    /*
+    const fetchListData = async () => {
+        const res = await AltReq(id)
+        //let data = res.data.players.map(player => {return {name: player.name}})
+        //const { rows } = await res.data.players.map(player => {return {name: player.name}})
+        //console.log(rows)
+        setRows(res)
+    }
+    fetchListData()*/
+    let data
+    //console.log(data)
 
     const [searchText, setSearchText] = React.useState('');
-    const [rows, setRows] = React.useState(data.rows);
+    const [rows, setRows] = React.useState([]);
+    //const [list, setList] = React.useState("");
 
     const requestSearch = (searchValue) => {
         setSearchText(searchValue);
         const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
-        const filteredRows = data.rows.filter((row) => {
+        const filteredRows = rows.filter((row) => {
             return Object.keys(row).some((field) => {
                 return searchRegex.test(row[field].toString());
             });
@@ -130,17 +139,43 @@ export const DataTableFilter = (e) => {
         setRows(filteredRows);
     };
 
-    React.useEffect(() => {
-        setRows(data.rows);
-    }, [data.rows]);
+    
 
+    /*React.useEffect(() => {
+        setRows(data.rows);
+    }, [data.rows]);*/
+
+    
+    React.useEffect(() => {
+            //const res = await AltReq(id)
+            //let data = res.data.players.map(player => {return {name: player.name}})
+            //const { rows } = await res.data.players.map(player => {return {name: player.name}})
+            //console.log(rows)
+
+            AltReq(id)
+            .then(res => {
+                console.log(res)
+                const data  = res.data.players.map(player => {return {id: player.id, name: player.name}})
+                console.log(data)
+                setRows(data)
+            })
+
+            
+        // eslint-disable-next-line
+    }, [])
+    
     return (
         <div style={{ display: 'flex', height: '80vh', width: '100%' }}>
             <div style={{ flexGrow: 1 }}>
                 <DataGrid
                     components={{ Toolbar: QuickSearchToolbar }}
                     rows={rows}
-                    columns={data.columns}
+                    columns={[{
+                        field: 'name',
+                        headerName: 'Names',
+                        width: 150,
+                        editable: true,
+                      }]}
                     componentsProps={{
                         toolbar: {
 

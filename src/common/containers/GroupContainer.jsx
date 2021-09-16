@@ -117,6 +117,7 @@ function Sublinks(e) {
     );
 }
 
+/*
 function Tester(e) {
     let { id } = useParams();
     return (
@@ -124,7 +125,7 @@ function Tester(e) {
             {id}
         </div>
     )
-}
+}*/
 
 function Home() {
     return (

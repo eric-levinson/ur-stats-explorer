@@ -79,16 +79,16 @@ export const SimpleTabs = () => {
                 <SelectedListItem/>
             </TabPanel>
             <TabPanel value={value} index={1} className={classes.tabcontent}>
-                <DataTableFilter />
+                <DataTableFilter id={id} />
             </TabPanel>
             <TabPanel value={value} index={2} className={classes.tabcontent}>
-                <DataTableFilter />
+                <DataTableFilter id={id} />
             </TabPanel>
             <TabPanel value={value} index={3} className={classes.tabcontent}>
-                <DataTableFilter />
+                <DataTableFilter id={id} />
             </TabPanel>
             <TabPanel value={value} index={4} className={classes.tabcontent}>
-                <DataTableFilter />
+                <DataTableFilter id={id} />
             </TabPanel> 
         </div>
     );
