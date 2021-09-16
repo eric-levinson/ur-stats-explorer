@@ -5,7 +5,6 @@ const key = process.env.REACT_APP_BCTOKEN
 //https://ballchasing.com/api/groups?group=week-01-7jp3zhq4w7&?sort-dir=asc&?sort-by=created
 //https://ballchasing.com/api/groups/macaroni-league-0p6avqc0gv
 export const UrlParse = (id, type) => {
-    
     const baseurl = 'http://localhost:8080/https://ballchasing.com/api/'
     //let reqUrl = baseurl + '/'
     if (type === 'group-list') {
@@ -20,11 +19,7 @@ export const UrlParse = (id, type) => {
         let err = 'err'
         throw err
     }
-
   }
-
-
-
 
 export const AltReq = (url) => axios.get(url, {
     headers: {
