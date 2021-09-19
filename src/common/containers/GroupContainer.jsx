@@ -10,6 +10,7 @@ import {
 
 import { UrlParse, AltReq } from "../../utils/AltReq";
 import { SimpleTabs } from '../components/nav/Tabs';
+//import { ClippedDrawer } from '../components/nav/ClippedDrawer'
 
 // Since routes are regular React components, they
 // may be rendered anywhere in the app, including in
@@ -26,7 +27,7 @@ let Generatelinks = props => {
     const [list, setList] = React.useState("");
 
     const { id, path, } = props;
-    console.log(id, path)
+    //console.log(id, path)
 
     let link = path && path !== undefined ? path + '/' : ''
 
@@ -35,7 +36,7 @@ let Generatelinks = props => {
             const res = await AltReq(id)
             const { list } = await res.data
             setList(list)
-            console.log(list)
+            //console.log(list)
         }
         fetchListData()
         // eslint-disable-next-line
@@ -57,6 +58,7 @@ export const GroupContainer = (e) => {
     let { path, url } = useRouteMatch();
     return (
         <Router>
+            
             <div>
                 <ul>
                     <li>
@@ -88,8 +90,6 @@ export const GroupContainer = (e) => {
 
 
 
-
-
 function Sublinks(e) {
     // The <Route> that rendered this component has a
     // path of `/topics/:topicId`. The `:topicId` portion
@@ -98,8 +98,8 @@ function Sublinks(e) {
     let { id } = useParams();
     let { url } = useRouteMatch();
     let parse = UrlParse(id, 'group-list')
-    console.log(url)
-    console.log(e)
+    //console.log(url)
+    //console.log(e)
     return (
         <div>
             <h3>{id}</h3>

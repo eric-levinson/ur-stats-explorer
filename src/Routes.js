@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 //import pages
 import HomePage from './pages/HomePage';
 import ExplorePage from './pages/ExplorePage';
+import {BaseContainer} from './common/containers/BaseContainer'
 import {GroupContainer} from './common/containers/GroupContainer'
 
 /*const thangs = [
@@ -17,18 +18,19 @@ import {GroupContainer} from './common/containers/GroupContainer'
   }
 ]*/
 
-
-
 class Routes extends React.Component {
+
+
+
     render() {
       return (
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path='/explore/:origin' component={ExplorePage} />
+          <Route path='/old/:origin' component={ExplorePage} />
           <Route path='/group/' component={GroupContainer} />
           { /*<Route path='/explore/match/:origin' component={MatchContainer} /> */}
-          <Route path='/s10' component={ExplorePage} origin='season-10-j1nooa6jlw' />
-          <Route path='/s11' component={ExplorePage} origin='season-11-phqfzmk1fq' />
+          <Route path='/explore' component={BaseContainer} origin='season-10-j1nooa6jlw' />
+          <Route path='/s11' component={BaseContainer} origin='season-11-phqfzmk1fq' />
 
           
           <Route

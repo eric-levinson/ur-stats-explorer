@@ -1,7 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
 import {
     DataGrid,
     GridOverlay,
@@ -12,16 +9,14 @@ import {
     GridToolbarExport
 } from '@mui/x-data-grid';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { useDemoData } from '@mui/x-data-grid-generator';
-import ClearIcon from '@material-ui/icons/Clear';
-import SearchIcon from '@material-ui/icons/Search';
+//import { useDemoData } from '@mui/x-data-grid-generator';
 import { createTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { UrlParse, AltReq } from '../../../utils/AltReq';
 
-function escapeRegExp(value) {
-    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-}
+import _ from 'lodash'
+
+
 
 
 const defaultTheme = createTheme();
@@ -53,63 +48,19 @@ const useStyles = makeStyles(
 
 function CustomLoadingOverlay() {
     return (
-      <GridOverlay>
-        <div style={{ position: 'absolute', top: 0, width: '100%' }}>
-          <LinearProgress />
-        </div>
-      </GridOverlay>
-    );
-  }
-
-  let loading = false
-
-function QuickSearchToolbar(props) {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <div>
-                {loading ? <CustomLoadingOverlay /> : null}
-                <GridToolbarContainer>
-                    <GridToolbarColumnsButton />
-                    <GridToolbarFilterButton />
-                    <GridToolbarDensitySelector />
-                    <GridToolbarExport />
-                </GridToolbarContainer>
+        <GridOverlay>
+            <div style={{ position: 'absolute', top: 0, width: '100%' }}>
+                <LinearProgress />
             </div>
-            <TextField
-                variant="standard"
-                value={props.value}
-                onChange={props.onChange}
-                placeholder="Search…"
-                className={classes.textField}
-                InputProps={{
-                    startAdornment: <SearchIcon fontSize="small" />,
-                    endAdornment: (
-                        <IconButton
-                            title="Clear"
-                            aria-label="Clear"
-                            size="small"
-                            style={{ visibility: props.value ? 'visible' : 'hidden' }}
-                            onClick={props.clearSearch}
-                        >
-                            <ClearIcon fontSize="small" />
-                        </IconButton>
-                    ),
-                }}
-            />
-        </div>
+        </GridOverlay>
     );
 }
 
-QuickSearchToolbar.propTypes = {
-    clearSearch: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired,
-};
 
-export const DataTableFilter = (e) => {
-    let id = UrlParse(e.id, 'group-stats')
+
+
+export const DataTableFilter = props => {
+    let id = UrlParse(props.id, 'group-stats')
     //const res =  AltReq(id)
     //const { data } = res.data.players.map(player => {return {name: player.name}})
     /*
@@ -121,71 +72,73 @@ export const DataTableFilter = (e) => {
         setRows(res)
     }
     fetchListData()*/
-    let data
     //console.log(data)
 
-    const [searchText, setSearchText] = React.useState('');
     const [rows, setRows] = React.useState([]);
+    const [columns, setColumns] = React.useState([])
     //const [list, setList] = React.useState("");
 
-    const requestSearch = (searchValue) => {
-        setSearchText(searchValue);
-        const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
-        const filteredRows = rows.filter((row) => {
-            return Object.keys(row).some((field) => {
-                return searchRegex.test(row[field].toString());
-            });
-        });
-        setRows(filteredRows);
-    };
 
-    
 
-    /*React.useEffect(() => {
-        setRows(data.rows);
-    }, [data.rows]);*/
+    function QuickSearchToolbar(props) {
+        const classes = useStyles();
 
-    
+        return (
+            <div className={classes.root}>
+                <div>
+                    <GridToolbarContainer>
+                        <GridToolbarColumnsButton />
+                        <GridToolbarFilterButton />
+                        <GridToolbarDensitySelector />
+                        <GridToolbarExport />
+                    </GridToolbarContainer>
+                </div>
+            </div>
+        );
+    }
+
+
     React.useEffect(() => {
-            //const res = await AltReq(id)
-            //let data = res.data.players.map(player => {return {name: player.name}})
-            //const { rows } = await res.data.players.map(player => {return {name: player.name}})
-            //console.log(rows)
+        //const res = await AltReq(id)
+        //let data = res.data.players.map(player => {return {name: player.name}})
+        //const { rows } = await res.data.players.map(player => {return {name: player.name}})
+        //console.log(rows)
 
-            AltReq(id)
-            .then(res => {
-                console.log(res)
-                const data  = res.data.players.map(player => {return {id: player.id, name: player.name}})
-                console.log(data)
-                setRows(data)
-            })
+        let base = [{
+            field: 'name',
+            headerName: 'Names',
+            width: 150,
+            editable: true,
+        }, {
+            field: 'team',
+            headerName: 'Teams',
+            width: 150,
+            editable: true,
+        }]
 
-            
+        let headers = props.data.players !== undefined ? _.keys(props.data.players[0].game_average[props.type]) : []
+        let content = props.data.players !== undefined ? props.data.players.map(player => { 
+            let stats = player.game_average[props.type]
+            return _.extend(stats, { id: player.id, name: player.name, team: player.team, })
+        
+        }) : []
+        setRows(props.data.players !== undefined ? content : [])
+        //console.log(rows)
+        setColumns(_.concat(base, headers.map(header => { return { field: header, headerName: header, width: 150, editable: false, } })))
+
+        console.log(props.type)
+        console.log(content)
         // eslint-disable-next-line
-    }, [])
-    
+    }, [props])
+
     return (
         <div style={{ display: 'flex', height: '80vh', width: '100%' }}>
+
             <div style={{ flexGrow: 1 }}>
                 <DataGrid
                     components={{ Toolbar: QuickSearchToolbar }}
                     rows={rows}
-                    columns={[{
-                        field: 'name',
-                        headerName: 'Names',
-                        width: 150,
-                        editable: true,
-                      }]}
-                    componentsProps={{
-                        toolbar: {
-
-                            value: searchText,
-                            onChange: (event) => requestSearch(event.target.value),
-                            clearSearch: () => requestSearch(''),
-
-                        },
-
-                    }}
+                    columns={columns}
 
                 />
             </div>
