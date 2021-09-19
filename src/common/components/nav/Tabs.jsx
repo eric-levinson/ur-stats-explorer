@@ -7,8 +7,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+// eslint-disable-next-line
+import Link from '@material-ui/core/Link';
 import { DataTableFilter } from '../data/DataTableFilter';
 import { SelectedListItem } from '../nav/SelectList'
+import { UrlParse, AltReq } from "../../../utils/AltReq";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,7 +56,38 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const SimpleTabs = () => {
+let GenerateTabs = props => {
+    const [list, setList] = React.useState("");
+
+    const { id, type } = props;
+    console.log(id, type)
+
+    
+    React.useEffect(() => {
+        const fetchListData = async () => {
+            const res = await AltReq(id)
+            const { list } = await res.data
+            setList(list)
+            console.log('fire')
+            console.log(res)
+        }
+        fetchListData()
+        // eslint-disable-next-line
+    }, [id])
+
+    
+    let table = list && typeof list !== undefined ? 'test' : id
+
+    return (
+        <>
+            {table}
+        </>
+    )
+}
+
+
+
+export const SimpleTabs = props => {
     let { id } = useParams();
     console.log(id)
     const classes = useStyles();
@@ -63,9 +97,12 @@ export const SimpleTabs = () => {
         setValue(newValue);
     };
 
+    let parse = UrlParse(id, 'group-stats')
+    console.log(parse)
     return (
         <div className={classes.root}>
             <h1>{id}</h1>
+            <GenerateTabs id={parse} />
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                     <Tab label="Group" {...a11yProps(0)} />
