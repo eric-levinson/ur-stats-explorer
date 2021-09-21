@@ -135,7 +135,7 @@ export const BaseContainer = (e) => {
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" noWrap>
-                        Explore - {season !== undefined ? season.name : null }  {active !== undefined ? ' - ' + active.name : 'Select option'}
+                        Explore - {active.season !== undefined ? active.season.name : null } {active.league !== undefined ? ' - ' + active.league.name : null} {active.week !== undefined ? ' - ' + active.week.name : null}
                     </Typography>
                 </Toolbar>
             </AppBar>
