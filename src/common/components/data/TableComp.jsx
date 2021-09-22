@@ -57,34 +57,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-let GenerateTabs = props => {
-    const [list, setList] = React.useState("");
 
-    const { id, type } = props;
-    console.log(id, type)
-
-    
-    React.useEffect(() => {
-        const fetchListData = async () => {
-            const res = await AltReq(id)
-            const { list } = await res.data
-            setList(list)
-            console.log('fire')
-            console.log(res)
-        }
-        fetchListData()
-        // eslint-disable-next-line
-    }, [id])
-
-    
-    let table = list && typeof list !== undefined ? 'test' : id
-
-    return (
-        <>
-            {table}
-        </>
-    )
-}
 
 
 
@@ -114,7 +87,7 @@ export const TableComp = props => {
         )
     }, [props.selected])
 
-    let parse = UrlParse(props.id, 'group-stats')
+    //let parse = UrlParse(props.id, 'group-stats')
 
     let table = active !== undefined ? <DataTableFilter id={active.id} /> : null
 
@@ -133,7 +106,8 @@ export const TableComp = props => {
             <TabPanel value={value} index={0} className={classes.tabcontent}>
                 
                 {props.active.season !== undefined ? props.active.season.name : null } {props.active.league !== undefined ? ' - ' + props.active.league.name : null} {props.active.week !== undefined ? ' - ' + props.active.week.name : null}
-
+                {props.active.week !== undefined ? AltReq(UrlParse(props.active.week.id, 'group-list'))
+                : null}
                 <SelectedListItem/>
             </TabPanel>
             <TabPanel value={value} index={1} className={classes.tabcontent}>

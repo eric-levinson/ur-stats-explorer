@@ -64,7 +64,6 @@ export const BaseContainer = (e) => {
     const [week, setWeek] = React.useState() // eslint-disable-next-line
     const [match, setMatch] = React.useState() // eslint-disable-next-line
     const [selected, setSelected] = React.useState()
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
     const [open, setOpen] = React.useState(true);
 
     const Updater = props => {
@@ -112,7 +111,6 @@ export const BaseContainer = (e) => {
 
     const handleListItemClick = (event, index, active) => {
         //console.log(active)
-        setSelectedIndex(index);
         handleClick()
         setSelected(active)
         Updater(active)
@@ -161,7 +159,7 @@ export const BaseContainer = (e) => {
                         <ListItem
                             button
 
-                            selected={selectedIndex === 0}
+                            
                             // eslint-disable-next-line react/jsx-no-duplicate-props
                             onClick={(event) => handleListItemClick(event, 0, { name: 'Season 10', id: 'season-10-j1nooa6jlw', type: 'season' })}
                         >
@@ -174,7 +172,7 @@ export const BaseContainer = (e) => {
 
                         <ListItem
                             button
-                            selected={selectedIndex === 1}
+                            
                             // eslint-disable-next-line react/jsx-no-duplicate-props
                             onClick={(event) => handleListItemClick(event, 1, { name: 'Season 11', id: 'season-11-phqfzmk1fq', type: 'season' })}
                         >
@@ -217,7 +215,7 @@ export const BaseContainer = (e) => {
                     >
                         {leagues.map((item, i) => <ListItem
                             button
-                            selected={selectedIndex === i++}
+                            
                             onClick={(event) => handleListItemClick(event, i++, {name: item.name, id: item.id, type: 'league'})}
                         >
                             <ListItemText primary={item.name} />
@@ -238,7 +236,7 @@ export const BaseContainer = (e) => {
                     >
                         {week.map((item, i) => <ListItem
                             button
-                            selected={selectedIndex === i++}
+                            
                             onClick={(event) => handleListItemClick(event, i++, {name: item.name, id: item.id, type: 'week'})}
                         >
                             <ListItemText primary={item.name} />
